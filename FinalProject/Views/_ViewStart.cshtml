@@ -1,0 +1,18 @@
+﻿@{
+    //Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    string layout = "";
+    if (controller == "Account" && action == "Login")
+    {
+        layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    }
+    else
+    {
+        layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    Layout = layout;
+}

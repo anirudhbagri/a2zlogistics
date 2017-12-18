@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FinalProject.Models.Discount>
+
+@{
+    ViewBag.Title = "Discounts";
+}
+
+<h2>Discounts - @Model.Count()</h2>
+<div style="width:100%;">
+    <div class="MessageFromController" style="color:green;margin-left:40%;margin-right:40%">@ViewBag.Message</div>
+</div>
+<p>
+    @Html.ActionLink("Discount Transactions","Index","DiscountTransactions")
+</p>
+<script>
+    function validateMy(form,discount,amount) {
+        var totalDiscount = discount*amount/100;
+        return confirm('Total discount amount = '+totalDiscount+'. \nWant to apply discount?');
+    }
+</script>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            Discount Value
+        </th>
+        <th></th>
+    </tr>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+                @using (Html.BeginForm("ApplyDiscount", "Discount", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.TextBox("DiscountPercent"+item.DiscountID, 0,new {style="width:50px" })
+                    @Html.Hidden("id", item.DiscountID)
+                    <input type="submit" value="Apply Discount"
+                           onclick="return validateMy(this,document.getElementById('@Html.Id("DiscountPercent"+item.DiscountID)').value,@item.TotalAmount);" />
+                }
+            </td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = item.DiscountID }, new { onclick = "return confirm('Are you sure you want to delete it?');" })
+        </td>   
+    </tr>
+}
+
+</table>

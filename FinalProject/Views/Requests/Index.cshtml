@@ -1,0 +1,77 @@
+﻿@using FinalProject.Models
+@model IEnumerable<FinalProject.Models.Request>
+
+@{
+    ViewBag.Title = "Requests";
+}
+
+<h2>Requests - @Model.Count()</h2>
+
+<p>
+    @Html.ActionLink("Create Request", "Create")
+</p>
+<div style="width:100%;">
+    <div class="MessageFromController" style="color:green;margin-left:40%;margin-right:40%">@ViewBag.AccMessage</div>
+    <div class="MessageFromController" style="color:red;margin-left:40%;margin-right:40%">@ViewBag.DecMessage</div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CardID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </th>
+        <th></th>
+        <th>Remarks</th>
+        <th></th>
+    </tr>        
+    @{
+       foreach (var item in Model)
+       {
+       <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+           <td>
+               @Html.DisplayFor(modelItem => item.UserName)
+           </td>
+           <td>
+               @Html.DisplayFor(modelItem => item.Name)
+           </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+            @Html.ActionLink("Accept", "Accept", new { id = item.RequestID},new { onclick = "return confirm('Are you sure you want to accept it?');"}) |
+            </td>
+            <td>
+                @using(Html.BeginForm("Decline","Requests",FormMethod.Post)){
+                    @Html.AntiForgeryToken()
+                    @Html.TextBox("Remarks","Declined")
+                    @Html.Hidden("id",item.RequestID)
+                <input type="submit" value="Decline" onclick="return confirm('Are you sure you want to delete it?')" />
+                }
+            </td>
+       </tr>
+            }
+        }
+</table>

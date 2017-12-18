@@ -1,0 +1,122 @@
+﻿@model FinalProject.Models.AspNetUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AspNetUser</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityStamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discriminator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discriminator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+    </dl>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            CardID
+        </th>
+        <th>
+            Card Name
+        </th>
+        <th>
+            Balance
+        </th>
+        <th>
+            Vehicle Number
+        </th>
+        <th>
+            Expiry Date
+        </th>
+        <th></th>
+    </tr>
+    @{
+        IEnumerable<FinalProject.Models.CardType> cardType = ViewBag.cardType;
+    }
+    @foreach (var item in ViewBag.cards)
+    {
+        <tr>
+            <td>
+                @item.CardID
+            </td>
+            <td>
+                @item.CardType
+            </td>
+            <td>
+                @item.Balance
+            </td>
+            <td>
+                @item.VehicleNumber
+            </td>
+            <td>
+                @item.ExpiryDate
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Cards", new { id = item.CardID },null) |
+                @Html.ActionLink("Delete", "Delete", "Cards", new { id = item.CardID },null)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

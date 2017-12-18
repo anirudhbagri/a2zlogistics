@@ -1,0 +1,101 @@
+﻿@using FinalProject.Models
+@model IEnumerable<FinalProject.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<h2>Transaction History - Total Transactions - @Model.Count()</h2>
+
+<!--
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+-->
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Date: @Html.TextBox("datestring", @String.Empty, new { placeholder = "DD-MM-YYYY" })
+        @Html.ValidationMessage("datestring")
+        Username: @Html.TextBox("username", @String.Empty, new { placeholder = "Enter mobile number" })
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+@{
+        foreach (var item in Model)
+         {
+             <tr>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.TimeStamp)              
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.TransactionID)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Username)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.CardID)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.CardType)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.VehicleNumber)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Type)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Amount)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Status)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Remarks)
+                 </td>
+                 <td>
+                     @Html.ActionLink("Edit", "Edit", new {id = item.TransactionID})
+                     <!--@Html.ActionLink("Delete", "Delete", new { id = item.TransactionID })
+                     @Html.ActionLink("Details", "Details", new {id = item.TransactionID})-->
+                 </td>
+             </tr>
+         }
+    }
+
+</table>
