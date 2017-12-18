@@ -25,7 +25,14 @@ namespace FinalProject.Controllers
             string userName = RequestContext.Principal.Identity.GetUserName();
             return db.DiscountTransactions.Where(p => p.Username == userName);
         }
-        
+
+        public IQueryable<DiscountTransaction> GetDiscountTransactions(DateTime date)
+        {
+            string userName = RequestContext.Principal.Identity.GetUserName();
+            IQueryable<DiscountTransaction> allTransactions = db.DiscountTransactions.Where(c => c.Username == userName);
+            IQueryable<DiscountTransaction> allTransactionsAfterDate = allTransactions.Where(c => c.TimeStamp>= date);
+            return allTransactionsAfterDate;
+        }
         /*
         // GET: api/GetDiscountTransactions/5
         [ResponseType(typeof(DiscountTransaction))]
