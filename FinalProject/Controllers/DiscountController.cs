@@ -112,7 +112,8 @@ namespace FinalProject.Controllers
                 DiscountID = Guid.NewGuid().ToString(),
                 DiscountPercent = discountPercent,
                 TimeStamp = DateTime.Now,
-                Username = discount.Username
+                Username = discount.Username,
+                CardType = db.CardDetails.FirstOrDefault(m => m.CardID == discount.CardID).CardType
             };
             db.DiscountTransactions.Add(discountTransaction);
             db.Entry(user).State = EntityState.Modified;

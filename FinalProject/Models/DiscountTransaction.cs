@@ -21,5 +21,6 @@ namespace FinalProject.Models
         public decimal Amount { get; set; }
         public decimal DiscountPercent { get; set; }
         public decimal DiscountAmount { get; set; }
+        public string CardType { get; set; }
     }
 }

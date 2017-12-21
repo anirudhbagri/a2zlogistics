@@ -20,5 +20,6 @@ namespace FinalProject.Models
         public System.DateTime ExpiryDate { get; set; }
         public string VehicleNumber { get; set; }
         public string CardType { get; set; }
+        public string Name { get; set; }
     }
 }

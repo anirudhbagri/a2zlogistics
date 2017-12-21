@@ -75,7 +75,7 @@ namespace FinalProject.Controllers
         }
         */
         // GET: /Users/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string smsMessage)
         {
             if (id == null)
             {
@@ -104,7 +104,7 @@ namespace FinalProject.Controllers
             {
                 db.Entry(aspnetuser).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new {message = "Changes saved.." });
+                return RedirectToAction("Index", new {message = "Changes Saved" });
             }
             return View(aspnetuser);
         }

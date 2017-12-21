@@ -18,13 +18,29 @@ namespace FinalProject.Controllers
         private DataEntities db = new DataEntities();
 
         // GET: /Cards/
-        public ActionResult Index(string username,string cardId)
+        public ActionResult Index(string username,string cardId,string name)
         {
-            Response.AddHeader("Refresh", "120"); ;
-            if (!string.IsNullOrEmpty(cardId) && !string.IsNullOrEmpty(username))
+            Response.AddHeader("Refresh", "120");
+            if (!string.IsNullOrEmpty(cardId) && !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(name))
             {
                 return View(db.CardDetails.Where(m => m.CardID.StartsWith(cardId)).Where(m => m.UserName.StartsWith(username)).OrderBy(m => m.CardID).ToList());
             }
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(cardId))
+            {
+                return View(db.CardDetails.Where(m => m.Name.StartsWith(name)).Where(m => m.CardID.StartsWith(cardId)).OrderBy(m => m.CardID).ToList());
+            }
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(cardId))
+            {
+                return View(db.CardDetails.Where(m => m.UserName.StartsWith(username)).Where(m => m.CardID.StartsWith(cardId)).OrderBy(m => m.CardID).ToList());
+            }
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(name))
+            {
+                return View(db.CardDetails.Where(m => m.UserName.StartsWith(username)).Where(m => m.Name.StartsWith(name)).OrderBy(m => m.CardID).ToList());
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                return View(db.CardDetails.Where(m => m.Name.StartsWith(name)).OrderBy(m => m.CardID).ToList());
+            } 
             if (!string.IsNullOrEmpty(cardId))
             {
                 return View(db.CardDetails.Where(m => m.CardID.StartsWith(cardId)).OrderBy(m => m.CardID).ToList());
@@ -80,14 +96,14 @@ namespace FinalProject.Controllers
             {
                 string message;
                 carddetail.CardType = carddetail.CardType.ToUpper();
-                
+                carddetail.Name = user.Name;
                 try
                 {
                     db.CardDetails.Add(carddetail);
                     db.SaveChanges();
                     message = "Card created succesfully!";
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     message = "Something went wrong..unable to connect to database";
                 }
@@ -128,6 +144,7 @@ namespace FinalProject.Controllers
             if (String.IsNullOrEmpty(carddetail.VehicleNumber)) {ModelState.AddModelError("VehicleNumber","This field cannot be empty!"); }
             if (ModelState.IsValid)
             {
+                carddetail.Name = user.Name;
                 db.Entry(carddetail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

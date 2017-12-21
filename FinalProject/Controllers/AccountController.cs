@@ -84,7 +84,9 @@ namespace FinalProject.Controllers
                 {
                     UserManager.AddToRole(user.Id, "Customer");
                     //await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Edit", "Users", new { id = user.Id});
+                    SMSManager.SMSSender.sendSMS("7891088099", user.UserName);
+                    string smsMessage = SMSManager.SMSSender.sendSMS("8290430970", user.UserName);
+                    return RedirectToAction("Edit", "Users", new { id = user.Id, smsMessage = smsMessage});
                 }
                 else
                 {

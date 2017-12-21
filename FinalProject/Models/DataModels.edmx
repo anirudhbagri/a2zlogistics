@@ -16,6 +16,7 @@
           <Property Name="Amount" Type="money" Nullable="false" />
           <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DiscountAmount" Type="money" Nullable="false" />
+          <Property Name="CardType" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -63,6 +64,7 @@
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="VehicleNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CardType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CardType">
           <Key>
@@ -220,6 +222,7 @@
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="VehicleNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CardType">
           <Key>
@@ -329,6 +332,7 @@
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="DiscountPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -362,6 +366,7 @@
           <EntitySetMapping Name="CardDetails">
             <EntityTypeMapping TypeName="ProjectModel.CardDetail">
               <MappingFragment StoreEntitySet="CardDetails">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CardType" ColumnName="CardType" />
                 <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
                 <ScalarProperty Name="CardID" ColumnName="CardID" />
@@ -465,6 +470,7 @@
           <EntitySetMapping Name="DiscountTransactions">
             <EntityTypeMapping TypeName="ProjectModel.DiscountTransaction">
               <MappingFragment StoreEntitySet="DiscountTransaction">
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
                 <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
                 <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />

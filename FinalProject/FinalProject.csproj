@@ -252,6 +252,7 @@
     <Compile Include="ResponseClass\RequestResponse.cs" />
     <Compile Include="ResponseClass\UserResponse.cs" />
     <Compile Include="SMSManager\SMSManager.cs" />
+    <Compile Include="SMSManager\SMSSender.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace FinalProject.Controllers
             string validationKey = CreateKey(System.Convert.ToInt32(64));
             string output = "<machineKey validationKey=\"" + validationKey + "\" decryptionKey=\"" + decryptionKey + "\" validation=\"SHA1\"/>";
             //Console.WriteLine("<machineKey validationKey=\"{0}\" decryptionKey=\"{1}\" validation=\"SHA1\"/>", validationKey, decryptionKey);
-            ViewBag.message = SMSManager.SMSManager.sendSMS();
+            //ViewBag.message = SMSManager.SMSSender.sendSMS("8107117700");
             return View(db.BankAccounts.ToList());
         }
 

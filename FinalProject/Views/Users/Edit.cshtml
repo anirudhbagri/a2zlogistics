@@ -5,8 +5,9 @@
 }
 
 <h2>Edit</h2>
-
-
+<div style="width:100%;">
+    <div class="MessageFromController" style="color:green;margin-left:40%;margin-right:40%">@ViewBag.Message</div>
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

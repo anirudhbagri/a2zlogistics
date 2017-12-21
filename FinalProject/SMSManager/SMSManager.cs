@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Web;
-
 namespace FinalProject.SMSManager
 {
     public class SMSManager
